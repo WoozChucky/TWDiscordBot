@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <UserSecretsId>dotnet-TWDiscordBot-9F4694FE-0CE0-42A3-A960-79F541F01635</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Discord.Net" Version="2.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-preview5.19227.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TWDiscordBot.Commands\TWDiscordBot.Commands.csproj" />
+    </ItemGroup>
+
+</Project>
