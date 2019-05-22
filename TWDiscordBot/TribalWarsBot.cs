@@ -7,6 +7,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using TWDiscordBot.Commands.Modules;
+using TWDiscordBot.Commands.Modules.TribalWars;
 using TWDiscordBot.Services.Audio.Contracts;
 
 namespace TWDiscordBot
@@ -38,13 +39,15 @@ namespace TWDiscordBot
 
             await _commands.AddModuleAsync<InfoModule>(_services);
             await _commands.AddModuleAsync<SongRequestModule>(_services);
+            await _commands.AddModuleAsync<AdminModule>(_services);
+            await _commands.AddModuleAsync<WorldConfigModule>(_services);
 
-            await _client.LoginAsync(TokenType.Bot, "NTgwMzgzNDY2MTE0MzgzOTA2.XOP_dQ.isBpaeCcetdp9Rs1YuiQT7BFws8");
+            await _client.LoginAsync(TokenType.Bot, "NTgwMzgzNDY2MTE0MzgzOTA2.XOWMgg.Z9gFFyixqDPZMVtJW9-zvOHdDwI");
             await _client.StartAsync();
 
             _client.GuildAvailable += OnClientGuildAvailable;
         }
-        
+
         private Task OnClientGuildAvailable(SocketGuild arg)
         {
             Serilog.Log.Information($"Registering handler for {arg.Name}");
@@ -53,7 +56,7 @@ namespace TWDiscordBot
 
             _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
             _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);
-            
+
             Serilog.Log.Information($"Discovered server {arg.Name}");
             return Task.CompletedTask;
         }

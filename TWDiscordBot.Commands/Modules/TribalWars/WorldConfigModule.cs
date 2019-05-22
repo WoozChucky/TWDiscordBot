@@ -1,11 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using Discord.Commands;
+using Newtonsoft.Json;
+using TWDiscordBot.Services.TribalWars.Contracts;
 
-namespace TWDiscordBot
+namespace TWDiscordBot.Commands.Modules.TribalWars
 {
-    class Temp
+    [Group("tw")]
+    public class WorldConfigModule : ModuleBase<SocketCommandContext>
     {
+        private readonly IWorldService _worldService;
+
+        public WorldConfigModule(IWorldService worldService)
+        {
+            _worldService = worldService;
+        }
+
+        [Command("info")]
+        public async Task DisplayInfo(string world)
+        {
+
+            var configuration = await _worldService.GetWorldConfiguration(world);
+
+            await Context.Channel.SendMessageAsync($"{world} world info:");
+            await Context.Channel.SendMessageAsync(JsonConvert.SerializeObject(configuration, Formatting.Indented));
+        }
+
         /*
          * Ataque
          * lgAMAw0DDgMNAwwDDQQMBA4EAAUBBQ8KDAUNBQ4FCQEQCgAFAQUIBQIFCgEQBQAFEAMMAw0DDgMMAg0CDgUIBQ8FAgUQAggFAwUPBQAFDwIIBQsKBwEPAwEFAgUQAw8BDAMNAw4DEAMLCg8DAgUMAg0CDgIBBRACDAINAg4CDwEBAwwCDgINAgECDAENAQ4BCwISFAMKEAIA9ICAgEF0YXF1ZfSAgIAz
@@ -21,6 +40,5 @@ namespace TWDiscordBot
          *
          * https://pt67.tribalwars.com.pt/interface.php?func=get_unit_info
          */
-
     }
 }

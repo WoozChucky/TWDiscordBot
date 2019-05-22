@@ -13,12 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\TribalWars\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TWDiscordBot.Services.Audio\TWDiscordBot.Services.Audio.csproj" />
-    <ProjectReference Include="..\TWDiscordBot.Services\TWDiscordBot.Services.csproj" />
+    <ProjectReference Include="..\TWDiscordBot.Services.TribalWars\TWDiscordBot.Services.TribalWars.csproj" />
   </ItemGroup>
 
 </Project>

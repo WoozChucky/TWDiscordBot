@@ -9,6 +9,8 @@ using TWDiscordBot.Services.Audio;
 using TWDiscordBot.Services.Audio.Contracts;
 using TWDiscordBot.Services.Threading;
 using TWDiscordBot.Services.Threading.Contracts;
+using TWDiscordBot.Services.TribalWars;
+using TWDiscordBot.Services.TribalWars.Contracts;
 
 namespace TWDiscordBot
 {
@@ -39,6 +41,7 @@ namespace TWDiscordBot
                 .AddSingleton(commands)
                 .AddSingleton<TribalWarsBot>()
                 .AddSingleton<ISongService, SongService>()
+                .AddSingleton<IWorldService, WorldService>()
                 .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
                 .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()
                 .AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>()
