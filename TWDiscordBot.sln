@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWDiscordBot", "TWDiscordBo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Commands", "TWDiscordBot.Commands\TWDiscordBot.Commands.csproj", "{83FA71A3-B95D-4446-AA2F-92EBD9D00477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Services.Threading", "TWDiscordBot.Services.Threading\TWDiscordBot.Services.Threading.csproj", "{B355D324-6F51-4290-BD21-A937B5BE5739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Services.Audio", "TWDiscordBot.Services.Audio\TWDiscordBot.Services.Audio.csproj", "{E9AF0927-52BC-457A-8DF1-D56950300F46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{83FA71A3-B95D-4446-AA2F-92EBD9D00477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83FA71A3-B95D-4446-AA2F-92EBD9D00477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83FA71A3-B95D-4446-AA2F-92EBD9D00477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B355D324-6F51-4290-BD21-A937B5BE5739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B355D324-6F51-4290-BD21-A937B5BE5739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B355D324-6F51-4290-BD21-A937B5BE5739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B355D324-6F51-4290-BD21-A937B5BE5739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9AF0927-52BC-457A-8DF1-D56950300F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9AF0927-52BC-457A-8DF1-D56950300F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9AF0927-52BC-457A-8DF1-D56950300F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9AF0927-52BC-457A-8DF1-D56950300F46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

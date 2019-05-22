@@ -1,52 +1,54 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TWDiscordBot.Background;
-using TWDiscordBot.Workers;
-using TWDiscordBot.Workers.Contracts;
+using Serilog;
+using TWDiscordBot.Services.Audio;
+using TWDiscordBot.Services.Audio.Contracts;
+using TWDiscordBot.Services.Threading;
+using TWDiscordBot.Services.Threading.Contracts;
 
 namespace TWDiscordBot
 {
     public class Program
     {
-        private readonly DiscordSocketClient _client;
-
-        private readonly CommandService _commands;
-
         private readonly IServiceProvider _serviceProvider;
-
 
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
+            Log.Logger = new LoggerConfiguration()
+                //.WriteTo.Async(a => a.RollingFile("Logs/log-{Date}.txt"))
+                .WriteTo.Console()
+                .CreateLogger();
+            
+            DependencyHelper.TestDependencies();
 
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
-        public Program()
+        private Program()
         {
-            _client = new DiscordSocketClient();
+            var client = new DiscordSocketClient();
 
-            _commands = new CommandService();
+            var commands = new CommandService();
 
             _serviceProvider = new ServiceCollection()
-                .AddSingleton(_client)
-                .AddSingleton(_commands)
-                .AddSingleton<CommandHandler>()
+                .AddSingleton(client)
+                .AddSingleton(commands)
+                .AddSingleton<TribalWarsBot>()
+                .AddSingleton<ISongService, SongService>()
+                .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
+                .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()
                 .AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>()
                 .AddHostedService<QueuedHostedService>()
                 .BuildServiceProvider();
         }
 
-        public async Task MainAsync()
+        private async Task MainAsync()
         {
-            await _serviceProvider.GetService<CommandHandler>().InitializeAsync();
+            await _serviceProvider.GetService<TribalWarsBot>().InitializeAsync();
 
             // Block this task until the program is closed.
             await Task.Delay(-1);
