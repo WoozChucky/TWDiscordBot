@@ -21,20 +21,13 @@ namespace TWDiscordBot.Commands.Modules
         [Command("register")]
         public async Task RegisterServer(string voiceChannel, string chatChannel)
         {
-            var user = Context.User as SocketGuildUser;
-
-            if (user.GuildPermissions.Administrator)
-            {
-                
-            }
-            
             var voice = Context.Guild.VoiceChannels.SingleOrDefault(vc => vc.Name.ToLower().Contains(voiceChannel.ToLower()));
             var text = Context.Guild.TextChannels.SingleOrDefault(vc => vc.Name.ToLower().Contains(chatChannel.ToLower()));
 
             _songService.SetMessageChannel(text);
             _songService.SetVoiceChannel(voice);
 
-            await Context.Channel.SendMessageAsync($"{Context.User.Mention} successfully updated voice server settings.");
+            await ReplyAsync($"{Context.User.Mention} successfully updated voice bot settings.");
         }
     }
 }

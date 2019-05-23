@@ -45,6 +45,7 @@ namespace TWDiscordBot
                 .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
                 .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()
                 .AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>()
+                .AddMemoryCache()
                 .AddHostedService<QueuedHostedService>()
                 .BuildServiceProvider();
         }

@@ -25,7 +25,14 @@ namespace TWDiscordBot.Services.TribalWars
                 json = JsonConvert.SerializeXmlNode(doc, Formatting.Indented);
             }
 
-            return JsonConvert.DeserializeObject<WorldConfiguration>(json);
+            var obj = JsonConvert.DeserializeObject<Response<WorldConfiguration>>(json);
+            
+            return obj.Config;
+        }
+
+        class Response<T>
+        {
+            public T Config { get; set; }
         }
     }
 }

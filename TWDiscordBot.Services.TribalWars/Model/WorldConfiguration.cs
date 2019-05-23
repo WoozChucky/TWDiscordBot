@@ -10,8 +10,22 @@ namespace TWDiscordBot.Services.TribalWars.Model
         [JsonProperty("unit_speed")]
         public string UnitSpeed { get; set; }
         
+        [JsonProperty("moral")]
         public string Moral { get; set; }
         
+        [JsonProperty("build")]
         public WorldBuildConfiguration Build { get; set; }
+
+        [JsonProperty("misc")]
+        public WorldMiscConfiguration Misc { get; set; }
+
+        [JsonProperty("commands")]
+        public WorldCommandsConfiguration Commands { get; set; }
+        
+        [JsonProperty("newbie")]
+        public WorldNewbieConfiguration Newbie { get; set; }
+
+        [JsonProperty("game")]
+        public WorldGameConfiguration Game { get; set; }
     }
 }

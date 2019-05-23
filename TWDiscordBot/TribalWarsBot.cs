@@ -48,16 +48,20 @@ namespace TWDiscordBot
             _client.GuildAvailable += OnClientGuildAvailable;
         }
 
-        private Task OnClientGuildAvailable(SocketGuild arg)
+        private Task OnClientGuildAvailable(SocketGuild guild)
         {
-            Serilog.Log.Information($"Registering handler for {arg.Name}");
-            var musicVoiceChannel = arg.VoiceChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
-            var musicRequestChannel = arg.TextChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
+            if (guild.Name == "Lole")
+            {
+                Serilog.Log.Information("Registering handler for {guild}", guild.Name);
+                var musicVoiceChannel = guild.VoiceChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
+                var musicRequestChannel = guild.TextChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
 
-            _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
-            _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);
+                _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
+                _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);
+            }
+            
 
-            Serilog.Log.Information($"Discovered server {arg.Name}");
+            Serilog.Log.Information("Discovered server {guild}", guild.Name);
             return Task.CompletedTask;
         }
 
@@ -74,13 +78,13 @@ namespace TWDiscordBot
         private async Task MessageDelete(Cacheable<IMessage, ulong> deleted, ISocketMessageChannel channel)
         {
             var message = await deleted.GetOrDownloadAsync();
-            Console.WriteLine($"Message Deleted: {message}");
+            Serilog.Log.Information("Message Deleted: {message}", message);
         }
 
         private async Task MessageUpdated(Cacheable<IMessage, ulong> before, SocketMessage after, ISocketMessageChannel channel)
         {
             var message = await before.GetOrDownloadAsync();
-            Console.WriteLine($"Message Updated: {message} -> {after}");
+            Serilog.Log.Information("Message Updated: {message} -> {after}", message, after);
         }
 
         private async Task MessageBulkUpdated(IReadOnlyCollection<Cacheable<IMessage, ulong>> messages, ISocketMessageChannel channel)
@@ -88,7 +92,7 @@ namespace TWDiscordBot
             foreach (var before in messages)
             {
                 var message = await before.GetOrDownloadAsync();
-                Console.WriteLine($"Bulk Updated: {message}");
+                Serilog.Log.Information("Bulk Updated: {message}", message);
             }
         }
 
@@ -122,7 +126,7 @@ namespace TWDiscordBot
 
         private Task Log(LogMessage msg)
         {
-            Console.WriteLine(msg.ToString());
+            Serilog.Log.Information("{msg}", msg);
             return Task.CompletedTask;
         }
     }

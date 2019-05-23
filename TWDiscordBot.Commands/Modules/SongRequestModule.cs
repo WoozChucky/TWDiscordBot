@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Serilog;
@@ -18,6 +19,22 @@ namespace TWDiscordBot.Commands.Modules
             _songService = songService;
         }
 
+        [Alias("info", "command", "commands", "?")]
+        [Command("help")]
+        public async Task DisplayHelp()
+        {
+            var output = "**[Song Request Commands]**\n\n";
+            output += "\t!audio <command> [arguments]\n\n";
+            output += "\t!audio `play/request/req/sq/songrequest` <YouTubeURL>\n";
+            output += "\t!audio `stream` <YouTubeURL>\n";
+            output += "\t!audio `skip/next/nextsong`\n";
+            output += "\t!audio `clear`\n";
+            output += "\t!audio `list`\n";
+            output += "\t!audio `song/nowplaying/np/currentsong/songname`";
+            
+            await ReplyAsync(output);
+        }
+
         [Alias("sq", "request", "req", "play")]
         [Command("songrequest", RunMode = RunMode.Async)]
         [Summary("Requests a song to be played")]
@@ -25,17 +42,8 @@ namespace TWDiscordBot.Commands.Modules
         {
             await Speedrun(url, 48);
         }
-
-        [Alias("test")]
-        [Command("soundtest", RunMode = RunMode.Async)]
-        [Summary("Performs a sound test")]
-        public async Task SoundTest()
-        {
-            await Request("https://www.youtube.com/watch?v=i1GOn7EIbLg");
-        }
-
+        
         [Command("speedrun", RunMode = RunMode.Async)]
-        [Summary("Performs a sound test")]
         public async Task Speedrun(string url, int speedModifier)
         {
             try
@@ -46,7 +54,7 @@ namespace TWDiscordBot.Commands.Modules
                     return;
                 }
 
-                var downloadAnnouncement = await ReplyAsync($"{Context.User.Mention} attempting to download {url}");
+                var downloadAnnouncement = await ReplyAsync($"{Context.User.Mention} attempting to fetch {url}");
                 var video = await _youTubeDownloadService.DownloadVideo(url);
                 await downloadAnnouncement.DeleteAsync();
 
@@ -70,7 +78,7 @@ namespace TWDiscordBot.Commands.Modules
         }
 
         [Command("stream", RunMode = RunMode.Async)]
-        [Summary("Streams a livestream URL")]
+        [Summary("Streams a live stream URL")]
         public async Task Stream(string url)
         {
             try
@@ -121,6 +129,33 @@ namespace TWDiscordBot.Commands.Modules
         {
             _songService.Next();
             await ReplyAsync("Skipped song");
+        }
+
+        [Command("list")]
+        public async Task ListQueue()
+        {
+            var musics = _songService.ShowQueue().ToList();
+            
+            if (!musics.Any() && _songService.NowPlaying == null)
+            {
+                await ReplyAsync("Queue is empty.");
+                return;
+            }
+
+            var output = string.Join("\n", 
+                musics.Select(m => $"-> **{m.Title}** `|{m.DurationString}|` requested by {m.Requester}")
+                    .ToArray());
+            
+            if (_songService.NowPlaying != null)
+            {
+                var m = _songService.NowPlaying;
+                output = output.Insert((output.Length - 1) <= 0 ? 0 : output.Length - 1, 
+                    $"-> **{m.Title}** `|{m.DurationString}|` requested by {m.Requester} (NOW PLAYING)\n");
+            }
+            
+            output = output.Insert(0, $"\t`{musics.Count()}` songs in queue.\n\n");
+            
+            await ReplyAsync(output);
         }
 
         [Alias("np", "currentsong", "songname", "song")]
