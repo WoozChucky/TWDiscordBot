@@ -5,12 +5,16 @@ using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using TWDiscordBot.Network.Http;
 using TWDiscordBot.Services.Audio;
 using TWDiscordBot.Services.Audio.Contracts;
 using TWDiscordBot.Services.Threading;
 using TWDiscordBot.Services.Threading.Contracts;
 using TWDiscordBot.Services.TribalWars;
 using TWDiscordBot.Services.TribalWars.Contracts;
+using TWDiscordBot.Network.Http.Contracts;
+using TWDiscordBot.Network.Http.TribalWars;
+using TWDiscordBot.Network.Http.TribalWars.Contracts;
 
 namespace TWDiscordBot
 {
@@ -45,8 +49,10 @@ namespace TWDiscordBot
                 .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
                 .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()
                 .AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>()
-                .AddMemoryCache()
+                .AddScoped<ITribalWarsClient, TribalWarsClient>()
                 .AddHostedService<QueuedHostedService>()
+                .AddMemoryCache()
+                .AddHttpClient()
                 .BuildServiceProvider();
         }
 

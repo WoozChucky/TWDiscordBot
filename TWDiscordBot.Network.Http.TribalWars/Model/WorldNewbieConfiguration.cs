@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace TWDiscordBot.Services.TribalWars.Model
+namespace TWDiscordBot.Network.Http.TribalWars.Model
 {
     public class WorldNewbieConfiguration
     {

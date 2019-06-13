@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Services.Audio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Services.TribalWars", "TWDiscordBot.Services.TribalWars\TWDiscordBot.Services.TribalWars.csproj", "{E5D7662A-A5A3-401D-86E4-75A74C2794CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Network.Http", "TWDiscordBot.Network.Http\TWDiscordBot.Network.Http.csproj", "{06A3EB79-86D6-4A0C-968E-C1B18944C9BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Network.Http.TribalWars", "TWDiscordBot.Network.Http.TribalWars\TWDiscordBot.Network.Http.TribalWars.csproj", "{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{E5D7662A-A5A3-401D-86E4-75A74C2794CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5D7662A-A5A3-401D-86E4-75A74C2794CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5D7662A-A5A3-401D-86E4-75A74C2794CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A3EB79-86D6-4A0C-968E-C1B18944C9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A3EB79-86D6-4A0C-968E-C1B18944C9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A3EB79-86D6-4A0C-968E-C1B18944C9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A3EB79-86D6-4A0C-968E-C1B18944C9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

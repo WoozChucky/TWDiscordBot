@@ -18,20 +18,13 @@ namespace TWDiscordBot.Commands.Modules.TribalWars
         [Command("info")]
         public async Task DisplayInfo(string world)
         {
-
             var configuration = await _worldService.GetWorldConfiguration(world);
 
-            await Context.Channel.SendMessageAsync($"{world} world info:");
-            await Context.Channel.SendMessageAsync(JsonConvert.SerializeObject(configuration, Formatting.Indented));
+            await ReplyAsync($"{world} world info:");
+            await ReplyAsync(JsonConvert.SerializeObject(configuration, Formatting.Indented));
         }
 
         /*
-         * Ataque
-         * lgAMAw0DDgMNAwwDDQQMBA4EAAUBBQ8KDAUNBQ4FCQEQCgAFAQUIBQIFCgEQBQAFEAMMAw0DDgMMAg0CDgUIBQ8FAgUQAggFAwUPBQAFDwIIBQsKBwEPAwEFAgUQAw8BDAMNAw4DEAMLCg8DAgUMAg0CDgIBBRACDAINAg4CDwEBAwwCDgINAgECDAENAQ4BCwISFAMKEAIA9ICAgEF0YXF1ZfSAgIAz
-         *
-         * Defesa
-         * jAAMAw0DDgMNAwwDDQQMBA4EAAUBBQ8KDAUNBQ4FEAoABQEFCAUCBQoBEAMMAw0DDgMQAgwCDQIOAgkBCAUPBQIFAAUPBQAFEAUBBQMFDwMLCggFDAMNAw4DDwIIBQcBDAINAg4CDgMCBRAFDwMLCgEFEhQPAgEDDAMNAw4DAQICBQwCDQIOAhAFCwIDCgD0gICARGVmZXNh9ICAgDM=
-         *
          * https://forum.tribalwars.us/index.php?threads/world-data.5996/
          *
          * https://pt67.tribalwars.com.pt/interface.php?func=get_config

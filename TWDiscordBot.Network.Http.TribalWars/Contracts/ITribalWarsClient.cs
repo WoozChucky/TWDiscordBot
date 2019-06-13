@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using TWDiscordBot.Network.Http.Contracts;
 using TWDiscordBot.Network.Http.TribalWars.Model;
 
-namespace TWDiscordBot.Services.TribalWars.Contracts
+namespace TWDiscordBot.Network.Http.TribalWars.Contracts
 {
-    public interface IWorldService
+    public interface ITribalWarsClient : IRestClient
     {
         Task<WorldConfiguration> GetWorldConfiguration(string world);
     }
