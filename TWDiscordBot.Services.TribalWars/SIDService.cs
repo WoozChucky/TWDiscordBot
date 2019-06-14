@@ -31,11 +31,7 @@ namespace TWDiscordBot.Services.TribalWars
 
         private async void ScannerOnNewSID(object sender, Cookie e)
         {
-            if (_sid != null && _sid.Value != e.Value)
-            {
-                _sid = e;
-            }
-            else if (_sid == null)
+            if (_sid == null || _sid.Value != e.Value)
             {
                 _sid = e;
             }
@@ -82,7 +78,15 @@ namespace TWDiscordBot.Services.TribalWars
 
         public async Task<string> GetCurrentSID()
         {
-            return await Task.FromResult(_sid?.Value);
+            if (_sid == null || string.IsNullOrEmpty(_sid.Value))
+            {
+                // TODO(Levezinho): Implement this
+                return (await _cookieManager.GetCookie("", "", BrowserType.GoogleChrome)).Value;
+            }
+            else
+            {
+                return await Task.FromResult(_sid?.Value);
+            }
         }
 
         

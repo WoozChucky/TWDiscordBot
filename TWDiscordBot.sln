@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Network.Http",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Network.Http.TribalWars", "TWDiscordBot.Network.Http.TribalWars\TWDiscordBot.Network.Http.TribalWars.csproj", "{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDiscordBot.Cookies", "TWDiscordBot.Cookies\TWDiscordBot.Cookies.csproj", "{58FB59BC-D271-4DB7-A518-12E54F902779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C44DB3C1-FD0D-41BA-9CD4-87A8D1E25C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58FB59BC-D271-4DB7-A518-12E54F902779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58FB59BC-D271-4DB7-A518-12E54F902779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58FB59BC-D271-4DB7-A518-12E54F902779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58FB59BC-D271-4DB7-A518-12E54F902779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

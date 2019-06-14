@@ -5,6 +5,6 @@ namespace TWDiscordBot.Services.TribalWars.Cookies
     public interface ICookiesManager
     {
         Task CreateOrUpdateCookie(Cookie cookie, BrowserType browser);
-        Task<Cookie> GetCookie(string host, BrowserType type);
+        Task<Cookie> GetCookie(string host, string name, BrowserType type);
     }
 }

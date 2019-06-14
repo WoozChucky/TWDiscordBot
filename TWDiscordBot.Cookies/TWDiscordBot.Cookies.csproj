@@ -5,15 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Discord.Net" Version="2.1.1" />
       <PackageReference Include="Microsoft.Data.Sqlite" Version="3.0.0-preview6.19304.10" />
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
       <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="4.6.0-preview6.19303.8" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\TWDiscordBot.Cookies\TWDiscordBot.Cookies.csproj" />
-      <ProjectReference Include="..\TWDiscordBot.Network.Http.TribalWars\TWDiscordBot.Network.Http.TribalWars.csproj" />
-    </ItemGroup>
-    
 </Project>
