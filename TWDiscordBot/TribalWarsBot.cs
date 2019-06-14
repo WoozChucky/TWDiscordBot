@@ -106,8 +106,7 @@ namespace TWDiscordBot
         private async Task HandleCommandAsync(SocketMessage socketMessage)
         {
             // Don't process the command if it was a system message
-            var message = socketMessage as SocketUserMessage;
-            if (message == null) return;
+            if (!(socketMessage is SocketUserMessage message)) return;
 
             // Create a number to track where the prefix ends and the command begins
             var argPos = 0;

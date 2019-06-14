@@ -15,6 +15,8 @@ using TWDiscordBot.Services.TribalWars.Contracts;
 using TWDiscordBot.Network.Http.Contracts;
 using TWDiscordBot.Network.Http.TribalWars;
 using TWDiscordBot.Network.Http.TribalWars.Contracts;
+using TWDiscordBot.Services.TribalWars.Cookies;
+using TWDiscordBot.Services.TribalWars.Scanner;
 
 namespace TWDiscordBot
 {
@@ -46,6 +48,8 @@ namespace TWDiscordBot
                 .AddSingleton<TribalWarsBot>()
                 .AddSingleton<ISongService, SongService>()
                 .AddSingleton<IWorldService, WorldService>()
+                .AddSingleton<ISIDScanner, SIDScanner>()
+                .AddSingleton<ICookiesManager, CookiesManager>()
                 .AddSingleton<ISIDService, SIDService>()
                 .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
                 .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()

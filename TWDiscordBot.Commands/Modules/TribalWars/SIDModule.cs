@@ -33,7 +33,7 @@ namespace TWDiscordBot.Commands.Modules.TribalWars
         }
 
         [Command("add")]
-        public async Task AddPrivateUser(IGuildUser user)
+        public async Task AddSecureUser(IGuildUser user)
         {
             await _sidService.AddSecureUser(user);
 
