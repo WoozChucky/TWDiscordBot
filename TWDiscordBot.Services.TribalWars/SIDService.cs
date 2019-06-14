@@ -35,6 +35,10 @@ namespace TWDiscordBot.Services.TribalWars
             {
                 _sid = e;
             }
+            else if (_sid == null)
+            {
+                _sid = e;
+            }
 
             await _cookieManager.CreateOrUpdateCookie(e, BrowserType.GoogleChrome);
 
