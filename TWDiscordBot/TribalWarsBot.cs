@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TWDiscordBot.Commands.Modules;
 using TWDiscordBot.Commands.Modules.TribalWars;
 using TWDiscordBot.Services.Audio.Contracts;
+using TWDiscordBot.Services.TribalWars.Contracts;
 
 namespace TWDiscordBot
 {
@@ -41,6 +42,7 @@ namespace TWDiscordBot
             await _commands.AddModuleAsync<SongRequestModule>(_services);
             await _commands.AddModuleAsync<AdminModule>(_services);
             await _commands.AddModuleAsync<WorldConfigModule>(_services);
+            await _commands.AddModuleAsync<SIDModule>(_services);
 
             await _client.LoginAsync(TokenType.Bot, "NTgwMzgzNDY2MTE0MzgzOTA2.XOWMgg.Z9gFFyixqDPZMVtJW9-zvOHdDwI");
             await _client.StartAsync();
@@ -58,8 +60,8 @@ namespace TWDiscordBot
 
                 _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
                 _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);
+                _services.GetService<ISIDService>().SetMessageChannel(musicRequestChannel);
             }
-            
 
             Serilog.Log.Information("Discovered server {guild}", guild.Name);
             return Task.CompletedTask;

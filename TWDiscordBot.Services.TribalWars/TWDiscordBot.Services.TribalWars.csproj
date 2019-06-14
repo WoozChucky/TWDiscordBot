@@ -11,5 +11,11 @@
     <ItemGroup>
       <ProjectReference Include="..\TWDiscordBot.Network.Http.TribalWars\TWDiscordBot.Network.Http.TribalWars.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Discord.Net.Core, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\..\..\Users\nunol\.nuget\packages\discord.net.core\2.1.0\lib\netstandard2.0\Discord.Net.Core.dll</HintPath>
+      </Reference>
+    </ItemGroup>
     
 </Project>

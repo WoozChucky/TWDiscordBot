@@ -46,6 +46,7 @@ namespace TWDiscordBot
                 .AddSingleton<TribalWarsBot>()
                 .AddSingleton<ISongService, SongService>()
                 .AddSingleton<IWorldService, WorldService>()
+                .AddSingleton<ISIDService, SIDService>()
                 .AddSingleton<IYouTubeDownloadService, YouTubeDownloadService>()
                 .AddSingleton<IAudioPlaybackService, AudioPlaybackService>()
                 .AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>()
