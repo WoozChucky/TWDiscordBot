@@ -9,16 +9,15 @@ namespace TWDiscordBot.Cookies.Adapters
 {
     public class GoogleChromeAdapter : ICookieAdapter
     {
+        private readonly string _databaseFile = ChromeAppDataFolder() + "/Cookies";
         public async Task<string> GetCookie(string domain, string name)
         {
-            var dbFile = ChromeAppDataFolder() + "/Cookies";
-            
             var dbSid = string.Empty;
             
             using (var connection = new SqliteConnection("" + 
                                                          new SqliteConnectionStringBuilder
                                                          {
-                                                             DataSource = dbFile
+                                                             DataSource = _databaseFile
                                                          }))
             {
                 await connection.OpenAsync();
@@ -45,9 +44,35 @@ namespace TWDiscordBot.Cookies.Adapters
             return dbSid;
         }
 
-        public Task UpdateCookie(string domain, string name, string value)
+        public async Task UpdateCookie(string domain, string name, string value)
         {
-            throw new System.NotImplementedException();
+            using (var connection = new SqliteConnection("" + 
+                                                         new SqliteConnectionStringBuilder
+                                                         {
+                                                             DataSource = _databaseFile
+                                                         }))
+            {
+                await connection.OpenAsync();
+
+                var command = connection.CreateCommand();
+
+                command.CommandText =
+                    "UPDATE cookies " +
+                    "SET encrypted_value = (@sid) " +
+                    $"WHERE host_key LIKE '%{domain}%' AND name LIKE '%{name}%'";
+                
+                var plainBytes = Encoding.ASCII.GetBytes(value);
+                var encodedData = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
+
+                command.Parameters.Add("@sid", SqliteType.Blob, encodedData.Length);
+
+                var changedRows = await command.ExecuteNonQueryAsync();
+
+                connection.Close();
+                
+                if (changedRows <= 0)
+                    throw new Exception("No rows updated.");
+            }
         }
 
         public Task CreateCookie(string domain, string name, string value)
