@@ -15,6 +15,8 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
         private readonly FileSystemWatcher _watcher;
         
         private static readonly object Lock = new object();
+        
+        DateTime lastRead = DateTime.MinValue;
 
         private bool _processing;
 
@@ -23,7 +25,7 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
             _watcher =
                 new FileSystemWatcher("C:/Users/nunol/OneDrive/Ambiente de Trabalho/M67", "cookies.txt")
                 {
-                    NotifyFilter = NotifyFilters.Size | NotifyFilters.LastAccess | NotifyFilters.LastWrite,
+                    NotifyFilter = NotifyFilters.LastWrite,
                     EnableRaisingEvents = true
                 };
             _watcher.Changed += WatcherOnChanged;
@@ -105,7 +107,12 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
                 if (!_processing)
                 {
                     _processing = true;
-                    RefreshCookie(e.FullPath);
+                    var lastWriteTime = File.GetLastWriteTime(e.FullPath);
+                    if (lastWriteTime.Ticks != lastRead.Ticks)
+                    {
+                        RefreshCookie(e.FullPath);
+                        lastRead = lastWriteTime;
+                    }
                     _processing = false;
                 }
             }

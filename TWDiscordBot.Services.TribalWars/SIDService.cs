@@ -14,11 +14,11 @@ namespace TWDiscordBot.Services.TribalWars
         private IMessageChannel _messageChannel;
 
         private readonly List<IGuildUser> _users;
-        
+
         private Cookie _sid;
 
         private readonly ISIDScanner _scanner;
-        
+
         private readonly ICookiesManager _cookieManager;
 
         public SIDService(ISIDScanner scanner, ICookiesManager cookieManager)
@@ -34,11 +34,18 @@ namespace TWDiscordBot.Services.TribalWars
             if (_sid == null || _sid.Value != e.Value)
             {
                 _sid = e;
+
+                BroadcastSID();
+
+                try
+                {
+                    await _cookieManager.CreateOrUpdateCookie(e, BrowserType.GoogleChrome);
+                }
+                catch (Exception exception)
+                {
+                    Serilog.Log.Warning("Error occurred while updating browser cookie.\n{error}", exception.Message);
+                }
             }
-
-            await _cookieManager.CreateOrUpdateCookie(e, BrowserType.GoogleChrome);
-
-            BroadcastSID();
         }
 
         private async void BroadcastSID()
@@ -70,7 +77,7 @@ namespace TWDiscordBot.Services.TribalWars
         {
             await _scanner.StartScan();
         }
-        
+
         public async Task StopScan()
         {
             await _scanner.StopScan();

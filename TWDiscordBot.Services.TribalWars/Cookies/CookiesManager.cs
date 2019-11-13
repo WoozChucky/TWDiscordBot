@@ -4,15 +4,15 @@ using TWDiscordBot.Cookies.Adapters;
 
 namespace TWDiscordBot.Services.TribalWars.Cookies
 {
-    public class CookiesManager : ICookiesManager
+    public sealed class CookiesManager : ICookiesManager
     {
         private ICookieAdapter _adapter;
-        
+
         public CookiesManager()
         {
             _adapter = null;
         }
-        
+
         public async Task CreateOrUpdateCookie(Cookie cookie, BrowserType browser)
         {
             switch (browser)
@@ -27,7 +27,7 @@ namespace TWDiscordBot.Services.TribalWars.Cookies
                     _adapter = null;
                     break;
             }
-            
+
             await CreateOrUpdate(cookie);
         }
 
@@ -45,8 +45,8 @@ namespace TWDiscordBot.Services.TribalWars.Cookies
                     _adapter = null;
                     break;
             }
-            
-            if (_adapter == null) 
+
+            if (_adapter == null)
                 throw new NullReferenceException(nameof(_adapter));
 
             var cookieValue = await _adapter.GetCookie(host, name);
@@ -55,7 +55,7 @@ namespace TWDiscordBot.Services.TribalWars.Cookies
             {
                 return null;
             }
-            
+
             return new Cookie
             {
                 Domain = host,
@@ -77,7 +77,5 @@ namespace TWDiscordBot.Services.TribalWars.Cookies
                 await _adapter.UpdateCookie(cookie.Domain, cookie.Name, cookie.Value);
             }
         }
-
-        
     }
 }

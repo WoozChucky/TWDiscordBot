@@ -13,11 +13,11 @@ namespace TWDiscordBot.Cookies.Adapters
         public async Task<string> GetCookie(string domain, string name)
         {
             var dbSid = string.Empty;
-            
-            using (var connection = new SqliteConnection("" + 
-                                                         new SqliteConnectionStringBuilder
+
+            await using (var connection = new SqliteConnection("" + new SqliteConnectionStringBuilder
                                                          {
-                                                             DataSource = _databaseFile
+                                                             DataSource = _databaseFile,
+                                                             Mode = SqliteOpenMode.ReadWrite
                                                          }))
             {
                 await connection.OpenAsync();
@@ -46,47 +46,47 @@ namespace TWDiscordBot.Cookies.Adapters
 
         public async Task UpdateCookie(string domain, string name, string value)
         {
-            using (var connection = new SqliteConnection("" + 
-                                                         new SqliteConnectionStringBuilder
-                                                         {
-                                                             DataSource = _databaseFile
-                                                         }))
-            {
-                await connection.OpenAsync();
+            await using var connection = new SqliteConnection("" +
+                                                              new SqliteConnectionStringBuilder
+                                                              {
+                                                                  DataSource = _databaseFile,
+                                                                  Mode = SqliteOpenMode.ReadWrite
+                                                              });
+            await connection.OpenAsync();
 
-                var command = connection.CreateCommand();
+            var command = connection.CreateCommand();
 
-                command.CommandText =
-                    "UPDATE cookies " +
-                    "SET encrypted_value = (@sid) " +
-                    $"WHERE host_key LIKE '%{domain}%' AND name LIKE '%{name}%'";
-                
-                var plainBytes = Encoding.ASCII.GetBytes(value);
-                var encodedData = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
+            command.CommandText =
+                "UPDATE cookies " +
+                "SET encrypted_value = (@sid) " +
+                $"WHERE host_key LIKE '%{domain}%' AND name LIKE '%{name}%'";
 
-                command.Parameters.Add("@sid", SqliteType.Blob, encodedData.Length);
+            var plainBytes = Encoding.ASCII.GetBytes(value);
+            var encodedData = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
 
-                var changedRows = await command.ExecuteNonQueryAsync();
+            command.Parameters.Add("@sid", SqliteType.Blob, encodedData.Length).Value = encodedData;
 
-                connection.Close();
-                
-                if (changedRows <= 0)
-                    throw new Exception("No rows updated.");
-            }
+            var changedRows = await command.ExecuteNonQueryAsync();
+
+            Console.WriteLine(changedRows);
+
+            connection.Close();
+
+            if (changedRows <= 0)
+                throw new Exception("No rows updated.");
         }
 
         public Task CreateCookie(string domain, string name, string value)
         {
             throw new System.NotImplementedException();
         }
-        
+
         private static string ChromeAppDataFolder()
         {
             var userPath = Environment.GetEnvironmentVariable(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 
-                    "LOCALAPPDATA" : "Home");
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "LOCALAPPDATA" : "Home");
 
-            
+
             var path = System.IO.Path.Combine(userPath, "Google/Chrome/User Data/Default");
 
             return path;

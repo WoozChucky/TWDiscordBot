@@ -30,7 +30,7 @@ namespace TWDiscordBot
                 //.WriteTo.Async(a => a.RollingFile("Logs/log-{Date}.txt"))
                 .WriteTo.Console()
                 .CreateLogger();
-            
+
             DependencyHelper.TestDependencies();
 
             new Program().MainAsync().GetAwaiter().GetResult();
