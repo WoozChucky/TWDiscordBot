@@ -5,15 +5,15 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
     public class WorldNewbieConfiguration
     {
         [JsonProperty("days")]
-        public string Days { get; set; }
+        public int Days { get; set; }
         
         [JsonProperty("ratio_days")]
-        public string RatioDays { get; set; }
+        public int RatioDays { get; set; }
         
         [JsonProperty("ratio")]
-        public string Ratio { get; set; }
+        public int Ratio { get; set; }
         
         [JsonProperty("removeNewbieVillages")]
-        public string RemoveNewbieVillages { get; set; }
+        public int RemoveNewbieVillages { get; set; }
     }
 }

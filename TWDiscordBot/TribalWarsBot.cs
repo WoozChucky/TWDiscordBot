@@ -52,11 +52,11 @@ namespace TWDiscordBot
 
         private Task OnClientGuildAvailable(SocketGuild guild)
         {
-            if (guild.Name == "Lole")
+            if (guild.Name == "M70")
             {
                 Serilog.Log.Information("Registering handler for {guild}", guild.Name);
-                var musicVoiceChannel = guild.VoiceChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
-                var musicRequestChannel = guild.TextChannels.SingleOrDefault(t => t.Name.ToLower().Contains("general"));
+                var musicVoiceChannel = guild.VoiceChannels.SingleOrDefault(t => t.Name.Contains("Só carecas"));
+                var musicRequestChannel = guild.TextChannels.SingleOrDefault(t => t.Name.Contains("general"));
 
                 _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
                 _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);

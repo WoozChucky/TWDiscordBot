@@ -88,7 +88,10 @@ namespace TWDiscordBot.Services.TribalWars
             if (_sid == null || string.IsNullOrEmpty(_sid.Value))
             {
                 // TODO(Levezinho): Implement this
-                return (await _cookieManager.GetCookie("", "", BrowserType.GoogleChrome)).Value;
+                
+                var sid = await _cookieManager.GetCookie("tribalwars", "sid", BrowserType.GoogleChrome);
+                
+                return sid.Value;
             }
             else
             {

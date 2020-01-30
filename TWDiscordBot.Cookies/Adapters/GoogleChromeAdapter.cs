@@ -10,6 +10,7 @@ namespace TWDiscordBot.Cookies.Adapters
     public class GoogleChromeAdapter : ICookieAdapter
     {
         private readonly string _databaseFile = ChromeAppDataFolder() + "/Cookies";
+        
         public async Task<string> GetCookie(string domain, string name)
         {
             var dbSid = string.Empty;

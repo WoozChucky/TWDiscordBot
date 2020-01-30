@@ -5,13 +5,13 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
     public class WorldConfiguration
     {
         [JsonProperty("speed")]
-        public string Speed { get; set; }
+        public int Speed { get; set; }
         
         [JsonProperty("unit_speed")]
-        public string UnitSpeed { get; set; }
+        public double UnitSpeed { get; set; }
         
         [JsonProperty("moral")]
-        public string Moral { get; set; }
+        public double Moral { get; set; }
         
         [JsonProperty("build")]
         public WorldBuildConfiguration Build { get; set; }
@@ -27,5 +27,20 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
 
         [JsonProperty("game")]
         public WorldGameConfiguration Game { get; set; }
+
+        [JsonProperty("snob")]
+        public WorldSnobConfiguration Snob { get; set; }
+        
+        [JsonProperty("ally")]
+        public WorldAllyConfiguration Ally { get; set; }
+        
+        [JsonProperty("coord")]
+        public WorldCoordConfiguration Coords { get; set; }
+        
+        [JsonProperty("sitter")]
+        public WorldSitterConfiguration Sitter { get; set; }
+        
+        [JsonProperty("sleep")]
+        public WorldSleepConfiguration Sleep { get; set; }
     }
 }

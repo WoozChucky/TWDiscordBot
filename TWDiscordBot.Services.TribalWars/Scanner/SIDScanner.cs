@@ -23,7 +23,7 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
         public SIDScanner()
         {
             _watcher =
-                new FileSystemWatcher("C:/Users/nunol/OneDrive/Ambiente de Trabalho/M67", "cookies.txt")
+                new FileSystemWatcher("D:/Personal/TWDiscordBot", "global.json")
                 {
                     NotifyFilter = NotifyFilters.LastWrite,
                     EnableRaisingEvents = true

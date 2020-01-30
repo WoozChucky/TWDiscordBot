@@ -5,9 +5,9 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
     public class WorldCommandsConfiguration
     {
         [JsonProperty("millis_arrival")]
-        public string MillisArrival { get; set; }
+        public int MillisArrival { get; set; }
         
         [JsonProperty("command_cancel_time")]
-        public string CommandCancelTime { get; set; }
+        public int CommandCancelTime { get; set; }
     }
 }
