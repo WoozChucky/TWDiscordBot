@@ -1,4 +1,4 @@
-namespace TWDiscordBot.Network.Http.TribalWars.Model
+namespace TWDiscordBot.Network.Http.TribalWars.Model.Configuration
 {
     public class WorldConfigurationResponse
     {

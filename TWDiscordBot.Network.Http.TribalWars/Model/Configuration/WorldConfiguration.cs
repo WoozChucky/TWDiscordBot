@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace TWDiscordBot.Network.Http.TribalWars.Model
+namespace TWDiscordBot.Network.Http.TribalWars.Model.Configuration
 {
     public class WorldConfiguration
     {
@@ -42,5 +42,8 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
         
         [JsonProperty("sleep")]
         public WorldSleepConfiguration Sleep { get; set; }
+        
+        [JsonProperty("night")]
+        public WorldNightConfiguration Night { get; set; }
     }
 }

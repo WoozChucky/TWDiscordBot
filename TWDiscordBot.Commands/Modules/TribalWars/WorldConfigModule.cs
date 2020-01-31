@@ -23,6 +23,30 @@ namespace TWDiscordBot.Commands.Modules.TribalWars
             await ReplyAsync($"{world} world info:");
             await ReplyAsync(JsonConvert.SerializeObject(configuration, Formatting.Indented));
         }
+        
+        [Command("players"), Alias("ps")]
+        public async Task DisplayPlayers(string world)
+        {
+            await _worldService.GetWorldPlayers(world);
+
+            await ReplyAsync("Refresh player data for " + world + ".");
+        }
+
+        [Command("player"), Alias("p")]
+        public async Task DisplayPlayer(string world, string playerName)
+        {
+            var player = await _worldService.GetWorldPlayer(world, playerName);
+
+            await ReplyAsync(JsonConvert.SerializeObject(player, Formatting.Indented));
+        }
+        
+        [Command("player"), Alias("p")]
+        public async Task DisplayPlayer(string world, long playerId)
+        {
+            var player = await _worldService.GetWorldPlayer(world, playerId);
+
+            await ReplyAsync(JsonConvert.SerializeObject(player, Formatting.Indented));
+        }
 
         /*
          * https://forum.tribalwars.us/index.php?threads/world-data.5996/

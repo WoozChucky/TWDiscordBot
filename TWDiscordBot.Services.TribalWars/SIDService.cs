@@ -89,7 +89,7 @@ namespace TWDiscordBot.Services.TribalWars
             {
                 // TODO(Levezinho): Implement this
                 
-                var sid = await _cookieManager.GetCookie("tribalwars", "sid", BrowserType.GoogleChrome);
+                var sid = await _cookieManager.GetCookie("pt70", "sid", BrowserType.GoogleChrome);
                 
                 return sid.Value;
             }

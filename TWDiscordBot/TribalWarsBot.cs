@@ -44,7 +44,7 @@ namespace TWDiscordBot
             await _commands.AddModuleAsync<WorldConfigModule>(_services);
             await _commands.AddModuleAsync<SIDModule>(_services);
 
-            await _client.LoginAsync(TokenType.Bot, "NTgwMzgzNDY2MTE0MzgzOTA2.XOWMgg.Z9gFFyixqDPZMVtJW9-zvOHdDwI");
+            await _client.LoginAsync(TokenType.Bot, "NTgwMzgzNDY2MTE0MzgzOTA2.XjQo7g.1WzoyHlIloKarGHVzcoT4FOBHVA");
             await _client.StartAsync();
 
             _client.GuildAvailable += OnClientGuildAvailable;
@@ -56,7 +56,7 @@ namespace TWDiscordBot
             {
                 Serilog.Log.Information("Registering handler for {guild}", guild.Name);
                 var musicVoiceChannel = guild.VoiceChannels.SingleOrDefault(t => t.Name.Contains("Só carecas"));
-                var musicRequestChannel = guild.TextChannels.SingleOrDefault(t => t.Name.Contains("general"));
+                var musicRequestChannel = guild.TextChannels.SingleOrDefault(t => t.Name.Contains("hybrid-theory"));
 
                 _services.GetService<ISongService>().SetVoiceChannel(musicVoiceChannel);
                 _services.GetService<ISongService>().SetMessageChannel(musicRequestChannel);

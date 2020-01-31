@@ -23,7 +23,7 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
         public SIDScanner()
         {
             _watcher =
-                new FileSystemWatcher("D:/Personal/TWDiscordBot", "global.json")
+                new FileSystemWatcher("D:/", "global.json")
                 {
                     NotifyFilter = NotifyFilters.LastWrite,
                     EnableRaisingEvents = true
@@ -51,6 +51,7 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
 
             var fileContent = await File.ReadAllTextAsync(filePath);
 
+            /*
             var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(fileContent);
 
@@ -59,6 +60,14 @@ namespace TWDiscordBot.Services.TribalWars.Scanner
             var cookieFile = JsonConvert.DeserializeObject<CookieFile>(json);
 
             var cookie = cookieFile.ArrayOfCookie.Cookie.FirstOrDefault(c => c.Name == "sid");
+            */
+
+            var cookie = new Cookie
+            {
+                Domain = "pt70.tribalwars.com.pt",
+                Name = "sid",
+                Value = fileContent
+            };
 
             if (cookie != null)
             {

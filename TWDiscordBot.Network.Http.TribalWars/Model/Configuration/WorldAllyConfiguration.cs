@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace TWDiscordBot.Network.Http.TribalWars.Model
+namespace TWDiscordBot.Network.Http.TribalWars.Model.Configuration
 {
     public class WorldAllyConfiguration
     {
@@ -35,6 +35,6 @@ namespace TWDiscordBot.Network.Http.TribalWars.Model
         public int Levels { get; set; }
         
         [JsonProperty("xp_requirements")]
-        public int XpRequirements { get; set; }
+        public string XpRequirements { get; set; }
     }
 }
